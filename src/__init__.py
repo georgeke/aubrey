@@ -1,4 +1,4 @@
-from flask import Flask, request
+from flask import Flask, request, render_template
 
 app = Flask(__name__)
 
@@ -8,8 +8,8 @@ def landing():
 
 @app.route("/hotline", methods=["GET"])
 def hotline():
-  query = requests.args.get("query")
+  query = request.args.get("query")
   return "TODO"
 
 if __name__ == "__main__":
-  app.run(host="127.0.0.1", port=5001)
+  app.run(host="127.0.0.1", port=5001, debug=True)
