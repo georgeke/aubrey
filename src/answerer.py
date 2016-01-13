@@ -1,17 +1,19 @@
-import numpy as wnp
+import json
+import numpy as np
 import nltk
 from nltk.corpus import wordnet as wn
 
-lyrics = [ ]
+with open("./data/lyrics_subset.json", "r") as file:
+    lyrics = json.load(file)["lyrics"]
 
 distance_matrix = np.zeros((len(lyrics), len(lyrics)))
 
 def get_word_map(l):
     tokens = nltk.word_tokenize(l)
     tagged = nltk.pos_tag(tokens)
-    
+
     # TODO() assign weights to each of these?
-    # JJ: adjective or numeral, ordinal
+    # JJ: adjective or numeral, ordinalResource 'tokenizers/punkt/english.pickle' not found.
     # JJR: adjective, comparative
     # JJS: adjective, superlative
     # NN: noun
@@ -32,7 +34,7 @@ def get_word_map(l):
     #   PRP: pronoun, personal
     #   PRP$: pronoun, possessive
     #   UH: interjection
-    tags = ["JJ", "JJR", "JJS", "NN", "NNS", "RB", "RBR", 
+    tags = ["JJ", "JJR", "JJS", "NN", "NNS", "RB", "RBR",
             "RBS", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ"]
     word_dict = {
         "N": [],
@@ -46,7 +48,7 @@ def get_word_map(l):
             if tup[1][0] == k:
                 count += 1
                 word_dict[k].append(tup[0])
-                break      
+                break
     word_dict["count"] = count
     return word_dict
 
@@ -55,11 +57,12 @@ def get_word_map(l):
 lydict = {}
 max_line_count = float("-inf")
 for l in lyrics:
+    print(l)
     lydict[l] = get_word_map(l)
     if lydict[l]["count"] > max_line_count:
         max_line_count = lydict[l]["count"]
 
-# TODO: compute pairwise distances    
+# TODO: compute pairwise distances
 # for l1 in lyrics:
 #     for l2 in lyrics:
 #         if l1 != l2:
@@ -67,7 +70,7 @@ for l in lyrics:
 
 dists = []
 
-input_map = get_word_map("<QUESTION HERE>")
+input_map = get_word_map("What should I add to my curry")
 
 stupid_array = {
     "N": wn.NOUN,
@@ -81,7 +84,7 @@ for lyric in lydict:
     dist = 0
     count = 0
     #print(lyric)
-    for key in stupid_array: 
+    for key in stupid_array:
         for word1 in input_map[key]:
             best_dist = float("-inf")
             for word2 in lydict[lyric][key]:
@@ -93,7 +96,7 @@ for lyric in lydict:
                     value = a.path_similarity(b)
                     if value is None:
                         value = 0
-                    
+
                     d = value
                     if d > best_dist:
                         best_dist = d
@@ -102,7 +105,7 @@ for lyric in lydict:
             if np.isfinite(best_dist):
                 count += 1
                 dist += best_dist
-                
+
     if count == 0:
         dist = float("-inf")
 
@@ -111,7 +114,7 @@ for lyric in lydict:
         "dist": dist,
         "count": count
     })
-    
+
     if count > max_count:
         max_count = count
 
@@ -120,13 +123,13 @@ the_lyric = None
 for dist_obj in dists:
     if dist_obj["count"] == 0:
         continue
-    
+
     norm_dist = dist_obj["dist"] / dist_obj["count"]
     print(dist_obj["lyric"])
     print(norm_dist)
     print("")
     if norm_dist is not None and norm_dist > min_dist:
-        min_dist = norm_distl
+        min_dist = norm_dist
         the_lyric = dist_obj["lyric"]
 
 print("")
