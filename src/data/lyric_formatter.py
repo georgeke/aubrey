@@ -34,6 +34,7 @@ def get_word_map(l):
             "RBS", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ"]
 
     tokens = nltk.word_tokenize(l)
+    tokens = list(set(tokens))
     tagged = nltk.pos_tag(tokens)
 
     word_dict = {
@@ -59,7 +60,8 @@ if __name__ == "__main__":
     # add keywords to each lyric
     lydict = {}
     for l in lyrics:
+        print(l)
         lydict[l] = get_word_map(l)
 
-    with open("lyric_dict.json", "w") as outfile:
+    with open("json/lyric_dict.json", "w") as outfile:
         json.dump(lydict, outfile)
