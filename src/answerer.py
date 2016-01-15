@@ -2,9 +2,10 @@ import json
 import numpy as np
 import time
 import data.lyric_formatter as lyric_formatter
+import data.distance_calculator as distance_calculator
 
 def answer(question):
-    with open("data/"+lyric_formatter.OUT_FILE, "r") as infile:
+    with open("data/json/lyric_dict.json", "r") as infile:
         lydict = json.load(infile)
 
     dists = []
@@ -16,14 +17,14 @@ def answer(question):
     for lyric in lydict:
         dists.append({
             "lyric": lyric,
-            "dist": 1#distance_calculator.distance(input_map, lydict[lyric])
+            "dist": distance_calculator.distance(input_map, lydict[lyric])
         })
 
-    min_dist = float("inf")
+    min_dist = float("-inf")
     the_lyric = None
     for dist_obj in dists:
         a_dist = dist_obj["dist"]
-        if a_dist is not None and a_dist < min_dist:
+        if a_dist is not None and a_dist > min_dist:
             min_dist = a_dist
             the_lyric = dist_obj["lyric"]
 

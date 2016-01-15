@@ -2,7 +2,6 @@ import json
 import nltk
 
 DATA_FILE = "json/lyrics_subset.json"
-OUT_FILE = "json/lyric_dict.json"
 
 def get_word_map(l):
     """
@@ -64,5 +63,5 @@ if __name__ == "__main__":
         lydict[l] = get_word_map(l)
         count += 1
 
-    with open(OUT_FILE, "w") as outfile:
+    with open("json/lyric_dict.json", "w") as outfile:
         json.dump(lydict, outfile)

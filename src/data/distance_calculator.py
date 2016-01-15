@@ -2,9 +2,6 @@ import json
 import numpy as np
 import nltk
 from nltk.corpus import wordnet as wn
-import lyric_formatter
-
-OUT_FILE = "json/distance_matrix.json"
 
 def distance(lyric_dict1, lyric_dict2):
     """
@@ -52,7 +49,7 @@ def distance(lyric_dict1, lyric_dict2):
     return 0
 
 if __name__ == "__main__":
-    with open(lyric_formatter.OUT_FILE, "r") as infile:
+    with open("json/lyric_dict.json", "r") as infile:
         lydict = json.load(infile)
 
     distance_matrix = np.zeros((len(lydict), len(lydict)))
@@ -62,5 +59,5 @@ if __name__ == "__main__":
             if y != x:
                 distance_matrix[y][x] = distance(dict_y, dict_x)
 
-    with open(OUT_FILE, "w") as outfile:
+    with open("json/distance_matrix.json", "w") as outfile:
         json.dump(distance_matrix.tolist(), outfile)
