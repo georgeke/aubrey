@@ -32,7 +32,7 @@ def distance(lyric_dict1, lyric_dict2):
                     a = wn.synsets(word1, pos=CHAR_TO_WORDNET[key])[0]
                     b = wn.synsets(word2, pos=CHAR_TO_WORDNET[key])[0]
                     # Maximum returned by path_similarity is 1 (same words)
-                    value = a.path_similarity(a)
+                    value = a.path_similarity(b)
                     if value is None:
                         value = 0
 
@@ -49,7 +49,7 @@ def distance(lyric_dict1, lyric_dict2):
 
     if np.isfinite(dist) and count > 0:
         return dist / count
-    return None
+    return 0
 
 if __name__ == "__main__":
     with open(lyric_formatter.OUT_FILE, "r") as infile:
@@ -63,4 +63,4 @@ if __name__ == "__main__":
                 distance_matrix[y][x] = distance(dict_y, dict_x)
 
     with open(OUT_FILE, "w") as outfile:
-        json.dump(np.array(distance_matrix), outfile)
+        json.dump(distance_matrix.tolist(), outfile)
