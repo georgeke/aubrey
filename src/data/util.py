@@ -1,6 +1,10 @@
 import json
+import time
 import nltk
 import numpy as np
+from lyric_formatter import save_lyric_dict_and_bag_of_words
+from feature_matrix_calculator import save_feature_matrix
+from clusterer import Clusterer
 
 """
 For one-time, general purpose function calls
@@ -8,8 +12,29 @@ For one-time, general purpose function calls
 
 DATA_FILE = "json/lyrics.json"
 
-def remove_duplicates(lyrics):
+def _remove_duplicates(lyrics):
     lyrics = list(set(lyrics))
+
+def _time(func):
+    now = time.time()
+    func()
+    then = time.time()
+    return then - now
+
+def clean_and_save_lyrics():
+    with open(DATA_FILE, "r") as infile:
+        lyrics = json.load(infile)
+
+    _remove_duplicates(lyrics)
+
+    with open(DATA_FILE, "w") as outfile:
+        json.dump(lyrics, outfile)
+
+def run_full_pipeline():
+    print("Generating lyric_dict and bag of words took {.2f}s".format(_time(save_lyric_dict_and_bag_of_words)))
+    print("Generating feature matrix took {.2f}s".format(_time(save_feature_matrix)))
+    clusterer = new Clusterer()
+    print("Clustering took {.2f}s".format(_time(clusterer.generate_clusters)))
 
 def print_stats(lyrics):
     with open("json/bag_of_words.json", "r") as infile:
@@ -25,11 +50,4 @@ def print_stats(lyrics):
     print("Number of unique words: {}".format(len(bag_of_words)))
 
 if __name__ == "__main__":
-    with open(DATA_FILE, "r") as infile:
-        lyrics = json.load(infile)
-
-    # Function calls here
     print_stats(lyrics)
-
-    with open(DATA_FILE, "w") as outfile:
-        json.dump(lyrics, outfile)
