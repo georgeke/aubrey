@@ -3,6 +3,10 @@ import numpy as np
 import nltk
 from nltk.corpus import wordnet as wn
 
+"""
+Generates a distance (or similarity) matrix between every lyric
+"""
+
 def distance(lyric_dict1, lyric_dict2):
     """
     Returns the distance between two lyrics, the greater the magnitude, the 'closer' the lyrics are

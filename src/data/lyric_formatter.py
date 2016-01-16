@@ -79,15 +79,20 @@ if __name__ == "__main__":
     count = 0
     for l in lyrics:
         print("{} of {}".format(count, len(lyrics)))
-        lydict[l] = get_word_map(l)
-        count += 1
+        word_map = get_word_map(l)
+
         words = []
-        for arr in lydict[l].values():
+        for arr in word_map.values():
             if isinstance(arr, list):
                 words.extend(stemmer.stem(word) for word in arr)
         for word in words:
             word_counter[word] += 1
-        bag_of_words.extend([word for word in words if word_counter[word] > 1])
+        filtered_words = [word for word in words if word_counter[word] > 1]
+        bag_of_words.extend(filtered_words)
+        word_map["words"] = filtered_words
+
+        lydict[l] = word_map
+        count += 1
     bag_of_words = list(set(bag_of_words))
 
     with open("json/lyric_dict.json", "w") as outfile:
