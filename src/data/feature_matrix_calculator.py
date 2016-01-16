@@ -20,9 +20,9 @@ def convert_lyric_to_feature_set(lyric, its_dict, bag_of_words):
             arr[col] = word_counts[word_from_bag]
     return arr
 
-if __name__ == "__main__":
+def save_feature_matrix():
     with open("json/bag_of_words.json", "r") as infile:
-        bag_of_words = json.load(infile)
+    bag_of_words = json.load(infile)
 
     with open("json/lyric_dict.json", "r") as infile:
         lyric_dict = json.load(infile)
@@ -34,3 +34,6 @@ if __name__ == "__main__":
 
     with open("json/feature_matrix.json", "w") as outfile:
         json.dump(feature_matrix.tolist(), outfile)
+
+if __name__ == "__main__":
+    save_feature_matrix()

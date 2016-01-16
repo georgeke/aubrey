@@ -71,9 +71,9 @@ def get_word_map(l):
 
     return word_dict
 
-if __name__ == "__main__":
+def save_lyric_dict_and_bag_of_words():
     with open("json/lyrics.json", "r") as infile:
-        lyrics = json.load(infile)
+    lyrics = json.load(infile)
 
     lydict = {}
     bag_of_words = []
@@ -97,3 +97,6 @@ if __name__ == "__main__":
 
     with open("json/bag_of_words.json", "w") as outfile:
         json.dump(bag_of_words, outfile)
+
+if __name__ == "__main__":
+    save_lyric_dict_and_bag_of_words()
