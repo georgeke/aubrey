@@ -12,13 +12,17 @@ def remove_duplicates(lyrics):
     lyrics = list(set(lyrics))
 
 def print_stats(lyrics):
+    with open("json/bag_of_words.json", "r") as infile:
+        bag_of_words = json.load(infile)
+
     lengths = [len(l.split(" ")) for l in lyrics]
     max_l = np.max(lengths)
-    print("Number of lyrics: {} words".format(len(lyrics)))
-    print("Average lyric length: {}".format(np.mean(lengths)))
+    print("Number of lyrics: {}".format(len(lyrics)))
+    print("Average lyric length: {} words".format(np.mean(lengths)))
     print("Lyric length range: [{}, {}]".format(np.min(lengths), max_l))
     print("Longest lyric: {}".format([l for l in lyrics if len(l.split(" ")) >= max_l][0]))
     print("Recommended # of clusters: {}".format(int(len(lyrics) / 500)))
+    print("Number of unique words: {}".format(len(bag_of_words)))
 
 if __name__ == "__main__":
     with open(DATA_FILE, "r") as infile:

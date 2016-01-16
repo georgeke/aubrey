@@ -1,12 +1,29 @@
 import json
 import nltk
+from nltk.stem.snowball import SnowballStemmer
+from collections import defaultdict
 
-DATA_FILE = "json/lyrics_subset.json"
+"""
+Generates a lyric dictionary as well as a bag of words
+
+Lyric Dictionary:
+    Maps each lyric to a dictionary
+    Each dictionary maps a word type (e.g. noun) to a list of words in the lyric of that word type
+
+Bag of words:
+    List of unique words in all the lyrics, to be used in our feature set
+    Reduced dimensionality by:
+        1. Removing common/stop words (NLTK does this in tokenization)
+        2. Filtering out words that only appear 1 or 2 times
+        3. 'Stemming': reducing words to their root, so as to reduce 'same' words in different forms
+"""
+
+DATA_FILE = "json/lyrics.json"
 
 def get_word_map(l):
     """
     TODO() assign weights to each of these?
-    JJ: adjective or numeral, ordinalResource 'tokenizers/punkt/english.pickle' not found.
+    JJ: adjective or numeral, ordinal
     JJR: adjective, comparative
     JJS: adjective, superlative
     NN: noun
@@ -34,13 +51,13 @@ def get_word_map(l):
     tokens = nltk.word_tokenize(l)
     tokens = list(set(tokens))
     tagged = nltk.pos_tag(tokens)
-
     word_dict = {
         "N": [],
         "R": [],
         "V": [],
         "J": []
     }
+
     count = 0
     for tup in tagged:
         for k in word_dict.keys():
@@ -55,13 +72,26 @@ if __name__ == "__main__":
     with open(DATA_FILE, "r") as infile:
         lyrics = json.load(infile)["lyrics"]
 
-    # add keywords to each lyric
     lydict = {}
+    word_counter = defaultdict(int)
+    bag_of_words = []
+    stemmer = SnowballStemmer("english")
     count = 0
     for l in lyrics:
         print("{} of {}".format(count, len(lyrics)))
         lydict[l] = get_word_map(l)
         count += 1
+        words = []
+        for arr in lydict[l].values():
+            if isinstance(arr, list):
+                words.extend(stemmer.stem(word) for word in arr)
+        for word in words:
+            word_counter[word] += 1
+        bag_of_words.extend([word for word in words if word_counter[word] > 1])
+    bag_of_words = list(set(bag_of_words))
 
     with open("json/lyric_dict.json", "w") as outfile:
         json.dump(lydict, outfile)
+
+    with open("json/bag_of_words.json", "w") as outfile:
+        json.dump(bag_of_words, outfile)
