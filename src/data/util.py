@@ -26,10 +26,10 @@ def print_stats(lyrics):
 
 if __name__ == "__main__":
     with open(DATA_FILE, "r") as infile:
-        lyrics = json.load(infile)["lyrics"]
+        lyrics = json.load(infile)
 
     # Function calls here
     print_stats(lyrics)
 
     with open(DATA_FILE, "w") as outfile:
-        json.dump({"lyrics": lyrics}, outfile)
+        json.dump(lyrics, outfile)

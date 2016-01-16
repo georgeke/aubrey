@@ -70,7 +70,7 @@ def get_word_map(l):
 
 if __name__ == "__main__":
     with open(DATA_FILE, "r") as infile:
-        lyrics = json.load(infile)["lyrics"]
+        lyrics = json.load(infile)
 
     lydict = {}
     word_counter = defaultdict(int)
