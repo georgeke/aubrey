@@ -1,3 +1,4 @@
+import os
 import json
 import numpy as np
 from sklearn.cluster import KMeans
@@ -6,11 +7,11 @@ from collections import defaultdict
 class Clusterer():
     CLUSTER_SIZE = 500
 
-    def __init__(self):
-        with open("data/json/feature_matrix.json", "r") as infile:
+    def __init__(self, root=""):
+        with open(os.path.join(root, "json/feature_matrix.json"), "r") as infile:
             self._feature_matrix = json.load(infile)
 
-        with open("data/json/lyrics.json", "r") as infile:
+        with open(os.path.join(root, "json/lyrics.json"), "r") as infile:
             self._lyrics = json.load(infile)
 
     @property

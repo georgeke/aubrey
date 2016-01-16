@@ -58,7 +58,7 @@ def answer(question):
     with open("data/json/bag_of_words.json", "r") as infile:
         bag_of_words = json.load(infile)
 
-    clusterer = Clusterer()
+    clusterer = Clusterer("data")
     clusterer.generate_clusters()
 
     input_map = get_word_map(question)
