@@ -45,9 +45,10 @@ def get_word_map(l):
       PRP$: pronoun, possessive
       UH: interjection
     """
-    tags = ["JJ", "JJR", "JJS", "NN", "NNS", "RB", "RBR",
+    _tags = ["JJ", "JJR", "JJS", "NN", "NNS", "RB", "RBR",
             "RBS", "VB", "VBD", "VBG", "VBN", "VBP", "VBZ"]
 
+    stemmer = SnowballStemmer("english")
     tokens = nltk.word_tokenize(l)
     tokens = list(set(tokens))
     tagged = nltk.pos_tag(tokens)
@@ -59,13 +60,17 @@ def get_word_map(l):
     }
 
     count = 0
+    all_words = []
     for tup in tagged:
         for k in word_dict.keys():
             if tup[1][0] == k:
                 count += 1
                 word_dict[k].append(tup[0])
+                all_words.append(stemmer.stem(tup[0]))
                 break
     word_dict["count"] = count
+    word_dict["words"] = all_words
+
     return word_dict
 
 if __name__ == "__main__":
@@ -73,27 +78,22 @@ if __name__ == "__main__":
         lyrics = json.load(infile)
 
     lydict = {}
-    word_counter = defaultdict(int)
     bag_of_words = []
-    stemmer = SnowballStemmer("english")
     count = 0
     for l in lyrics:
         print("{} of {}".format(count, len(lyrics)))
         word_map = get_word_map(l)
-
-        words = []
-        for arr in word_map.values():
-            if isinstance(arr, list):
-                words.extend(stemmer.stem(word) for word in arr)
-        for word in words:
-            word_counter[word] += 1
-        filtered_words = [word for word in words if word_counter[word] > 1]
-        bag_of_words.extend(filtered_words)
-        word_map["words"] = filtered_words
-
+        bag_of_words.extend(word_map["words"])
         lydict[l] = word_map
         count += 1
+
+    # Remove infrequent words
+    word_counter = defaultdict(int)
+    for word in bag_of_words:
+        word_counter[word] += 1
     bag_of_words = list(set(bag_of_words))
+    bag_of_words = [word for word in word_map["words"] if word_counter[word] > 1]
+
 
     with open("json/lyric_dict.json", "w") as outfile:
         json.dump(lydict, outfile)
