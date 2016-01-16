@@ -90,7 +90,7 @@ def save_lyric_dict_and_bag_of_words():
     for word in bag_of_words:
         word_counter[word] += 1
     bag_of_words = list(set(bag_of_words))
-    bag_of_words = [word for word in word_map["words"] if word_counter[word] > 1]
+    bag_of_words = [word for word in bag_of_words if word_counter[word] > 1]
 
     with open("json/lyric_dict.json", "w") as outfile:
         json.dump(lydict, outfile)
