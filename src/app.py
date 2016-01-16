@@ -8,8 +8,9 @@ def landing():
 
 @app.route("/hotline", methods=["GET"])
 def hotline():
-  query = request.args.get("query")
+  query = request.args.get("question")
   return "TODO"
 
 if __name__ == "__main__":
-  app.run()
+    # TODO:: remove debug
+  app.run(debug=True)

@@ -2,9 +2,14 @@
 <html>
   <head>
     <title>Aubrey</title>
+    <script src={{url_for('static', filename='js/app.js')}}></script>
   </head>
 
   <body>
-    
+    <form>
+      <input id="question" type="text" placeholder="Enter question...">
+      <button type="button" onclick="callTheHotline()">Send</button>
+    </form>
+    <div id="bling"></div>
   </body>
 </html
