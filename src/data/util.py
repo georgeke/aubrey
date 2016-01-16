@@ -10,7 +10,7 @@ from clusterer import Clusterer
 For one-time, general purpose function calls
 """
 
-DATA_FILE = "json/lyrics.json"
+LYRICS_FILE = "json/lyrics.json"
 
 def _remove_duplicates(lyrics):
     lyrics = list(set(lyrics))
@@ -22,21 +22,24 @@ def _time(func):
     return then - now
 
 def clean_and_save_lyrics():
-    with open(DATA_FILE, "r") as infile:
+    with open(LYRICS_FILE, "r") as infile:
         lyrics = json.load(infile)
 
     _remove_duplicates(lyrics)
 
-    with open(DATA_FILE, "w") as outfile:
+    with open(LYRICS_FILE, "w") as outfile:
         json.dump(lyrics, outfile)
 
 def run_full_pipeline():
     print("Generating lyric_dict and bag of words took {.2f}s".format(_time(save_lyric_dict_and_bag_of_words)))
     print("Generating feature matrix took {.2f}s".format(_time(save_feature_matrix)))
-    clusterer = new Clusterer()
+    clusterer = Clusterer()
     print("Clustering took {.2f}s".format(_time(clusterer.generate_clusters)))
 
-def print_stats(lyrics):
+def print_stats():
+    with open(LYRICS_FILE, "r") as infile:
+        lyrics = json.load(infile)
+
     with open("json/bag_of_words.json", "r") as infile:
         bag_of_words = json.load(infile)
 
@@ -50,4 +53,4 @@ def print_stats(lyrics):
     print("Number of unique words: {}".format(len(bag_of_words)))
 
 if __name__ == "__main__":
-    print_stats(lyrics)
+    print_stats()

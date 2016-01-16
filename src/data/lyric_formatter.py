@@ -73,7 +73,7 @@ def get_word_map(l):
 
 def save_lyric_dict_and_bag_of_words():
     with open("json/lyrics.json", "r") as infile:
-    lyrics = json.load(infile)
+        lyrics = json.load(infile)
 
     lydict = {}
     bag_of_words = []
