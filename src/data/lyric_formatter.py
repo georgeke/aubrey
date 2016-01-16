@@ -18,8 +18,6 @@ Bag of words:
         3. 'Stemming': reducing words to their root, so as to reduce 'same' words in different forms
 """
 
-DATA_FILE = "json/lyrics.json"
-
 def get_word_map(l):
     """
     TODO() assign weights to each of these?
@@ -74,7 +72,7 @@ def get_word_map(l):
     return word_dict
 
 if __name__ == "__main__":
-    with open(DATA_FILE, "r") as infile:
+    with open("json/lyrics.json", "r") as infile:
         lyrics = json.load(infile)
 
     lydict = {}
@@ -93,7 +91,6 @@ if __name__ == "__main__":
         word_counter[word] += 1
     bag_of_words = list(set(bag_of_words))
     bag_of_words = [word for word in word_map["words"] if word_counter[word] > 1]
-
 
     with open("json/lyric_dict.json", "w") as outfile:
         json.dump(lydict, outfile)

@@ -7,10 +7,10 @@ class Clusterer():
     CLUSTER_SIZE = 500
 
     def __init__(self):
-        with open("json/feature_matrix.json", "r") as infile:
+        with open("data/json/feature_matrix.json", "r") as infile:
             self._feature_matrix = json.load(infile)
 
-        with open("json/lyrics.json", "r") as infile:
+        with open("data/json/lyrics.json", "r") as infile:
             self._lyrics = json.load(infile)
 
     @property

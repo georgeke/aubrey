@@ -1,6 +1,7 @@
 import json
 import numpy as np
 import time
+from nltk.corpus import wordnet as wn
 from data.clusterer import Clusterer
 from data.lyric_formatter import get_word_map
 from data.feature_matrix_calculator import convert_lyric_to_feature_set
@@ -52,13 +53,16 @@ def distance(lyric_dict1, lyric_dict2):
 
 def answer(question):
     with open("data/json/lyric_dict.json", "r") as infile:
-        lyric_dict = json.load(infile)
+        lyric_dict = json.load(infile )
+
+    with open("data/json/bag_of_words.json", "r") as infile:
+        bag_of_words = json.load(infile)
 
     clusterer = Clusterer()
     clusterer.generate_clusters()
 
     input_map = get_word_map(question)
-    label = clusterer.predict([convert_lyric_to_feature_set(question, input_map)])[0]
+    label = clusterer.predict([convert_lyric_to_feature_set(question, input_map, bag_of_words)])[0]
     relevant_lyrics = clusterer.cluster_map[label]
     relevant_lyric_dict = {k:v for k, v in zip(relevant_lyrics, [lyric_dict[l] for l in relevant_lyrics])}
 
