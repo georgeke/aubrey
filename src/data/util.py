@@ -43,6 +43,9 @@ def print_stats():
     with open("json/bag_of_words.json", "r") as infile:
         bag_of_words = json.load(infile)
 
+    with open("json/feature_matrix.json", "r") as infile:
+        feature_matrix = json.load(infile)
+
     lengths = [len(l.split(" ")) for l in lyrics]
     max_l = np.max(lengths)
     print("Number of lyrics: {}".format(len(lyrics)))
@@ -51,6 +54,7 @@ def print_stats():
     print("Longest lyric: {}".format([l for l in lyrics if len(l.split(" ")) >= max_l][0]))
     print("Recommended # of clusters: {}".format(int(len(lyrics) / 500)))
     print("Number of unique words: {}".format(len(bag_of_words)))
+    print("Feature matrix dimensions: {}x{}".format(len(feature_matrix), len(feature_matrix[0])))
 
 if __name__ == "__main__":
     print_stats()
