@@ -11,14 +11,31 @@ body * {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
+.upper {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+    width: 500px;
+    height: 450px;
+}
+
+#bling {
+    vertical-align: middle;
+    width: 90%;
+    font-size: 2.4em;
+    color: white;
+}
+
 #description {
     font-size: 2.2em;
     color: white;
 }
 
 #question {
+    height: 70px;
     width: 400px;
-    margin-top: 2em;
     font-size: 2em;
     border: none;
 }
@@ -33,6 +50,11 @@ form > button {
     border:none;
     padding-left: 0.5em;
     padding-right: 0.5em;
+}
+
+form > button:disabled {
+    cursor: auto;
+    background-color: gray;
 }
 
 img {
