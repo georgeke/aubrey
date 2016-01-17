@@ -17,8 +17,8 @@ body * {
     justify-content: center;
     align-items: center;
     margin: 0 auto;
-    width: 500px;
-    height: 450px;
+    width: 400px;
+    height: 500px;
 }
 
 #bling {
@@ -41,11 +41,12 @@ body * {
 }
 
 form > button {
+    height: 50px;
     cursor: pointer;
     color: white;
     margin-top: 0.6em;
     font-size: 2em;
-    border-radius: 27%/50%;
+    border-radius: 25px;
     background-color: #279900;
     border:none;
     padding-left: 0.5em;
@@ -62,6 +63,7 @@ img {
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+    margin-bottom: 20px;
 }
 
 .flashing {

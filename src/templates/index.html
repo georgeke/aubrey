@@ -12,12 +12,12 @@
         <div class="upper">
             <div id="bling"></div>
             <img src={{url_for('static', filename='img/drake.jpg')}}>
-            <div id="description">Drake</div>
+            <div id="description">Aubrey</div>
         </div>
         <form onsubmit="app.callTheHotline(this)">
-            <input id="question" type="text" placeholder="Enter question..." maxlength="60">
+            <input id="question" type="text" placeholder="Enter question..." maxlength="60" autofocus>
             <br>
-            <button type="button" onclick="app.callTheHotline(this)">Send</button>
+            <button type="button" onclick="app.callTheHotline(this)" disabled>Send</button>
         </form>
     </div>
   </body>

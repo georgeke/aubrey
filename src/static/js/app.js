@@ -1,31 +1,61 @@
 var app = (function ($) {
-    var DEFAULT_DESC = "Drake",
-        LOADING_DESC = "Loading...";
+    var DEFAULT_DESC = "Aubrey",
+        LOADING_DESC = "Loading...",
+        DEFAULT_BUTTON = "Send",
+        RESTART_BUTTON = "Ask another",
+        waitingToRestart = false;
+
+    function _showLoading() {
+        $("button").prop('disabled', true);
+        $("#description").text(LOADING_DESC).addClass("flashing");
+    }
+
+    function _showAnswer(answer) {
+        var description = $("#description");
+        description.text(DEFAULT_DESC);
+        description.removeClass("flashing");
+        description.fadeOut();
+        $("#question").prop('disabled', true);
+        $("body div img").fadeOut('slow', function () {
+            $("#bling").text(answer).fadeIn();
+        });
+
+        $("button").text(RESTART_BUTTON).prop('disabled', false);
+        waitingToRestart = true;
+    }
+
+    function _resetApp() {
+        $("button").text(DEFAULT_BUTTON);
+        waitingToRestart = false;
+        $("#bling").fadeOut('slow', function () {
+            $("body div img").fadeIn();
+            $("#description").fadeIn();
+            $("#question").prop('disabled', false).val("");
+        });
+    }
 
     function callTheHotline() {
         event.preventDefault();
+
+        if (waitingToRestart) {
+            _resetApp();
+            return;
+        }
+
         var question = $("#question").val();
-        var description = $("#description");
 
         $.get("/hotline?question=" + question, function(data, status, response) {
             if (response.readyState == 4 && response.status == 200) {
-                $("#bling").text(response.responseText).show();
-                description.text(DEFAULT_DESC);
-                description.removeClass("flashing");
-                description.hide();
-                $("body div img").hide();
-                $("#question").prop('disabled', true);
+                _showAnswer(response.responseText);
             }
         });
 
-        $("button").prop('disabled', true);
-        description.text(LOADING_DESC).addClass("flashing");
+        _showLoading();
     }
 
     $( document ).ready(function () {
-        $("#question").keyup(function () {
+        $("#question").keydown(function () {
             length = $(this).val().length;
-            console.log(length)
             if (length > 33) {
                 $(this).css("font-size", "0.9em");
             } else if (length > 25) {
@@ -34,6 +64,12 @@ var app = (function ($) {
                 $(this).css("font-size", "1.5em");
             } else {
                 $(this).css("font-size", "2em");
+            }
+
+            if (length <= 0) {
+                $("button").prop("disabled", true);
+            } else {
+                $("button").prop("disabled", false);
             }
         });
     });
