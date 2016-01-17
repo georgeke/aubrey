@@ -3,13 +3,13 @@ html {
 }
 
 * {
-    margin:0;
+    margin: 0;
 }
 
 body * {
     text-align: center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
-    margin:0;
+    margin: 0;
 }
 
 .topbar {
@@ -18,10 +18,65 @@ body * {
     margin: 0 auto;
     height: 30px;
     background-color: #3498db;
+    text-align:center;
 }
 
 .topbar * {
     color: white;
+}
+
+.signalbar {
+    display: inline-block;
+    width: 4px;
+    margin: 0;
+    background-color: white;
+}
+
+.tier0 {
+    height: 4px;
+}
+
+.tier1 {
+    height: 7px;
+}
+
+.tier2 {
+    height: 11px;
+}
+
+.tier3 {
+    height: 14px;
+}
+
+.time {
+    margin: 0 auto;
+}
+
+.left {
+    line-height: 30px;
+    font-size: 10px;
+    height: 30px;
+    display: inline-block;
+    width: 50px;
+    float: left;
+}
+
+.right {
+    width: 50px;
+    float: right;
+}
+
+.info {
+    text-decoration: none;
+    margin-right: 3px;
+    color: black;
+    float: right;
+    background-color: white;
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    font-size: 18px;
+    font-weight: bold;
 }
 
 .bottombar {
