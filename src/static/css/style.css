@@ -2,23 +2,63 @@ html {
     background-color: black;
 }
 
-body > div {
-    margin: 3%;
+* {
+    margin:0;
 }
 
 body * {
     text-align: center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+    margin:0;
+}
+
+.topbar {
+    padding-top: 3px;
+    width: 400px;
+    margin: 0 auto;
+    height: 30px;
+    background-color: #3498db;
+}
+
+.topbar * {
+    color: white;
+}
+
+.bottombar {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 400px;
+    margin: 0 auto;
+    height: 60px;
+    background-color: #3498db;
+}
+
+.circle {
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    margin: 0 auto;
+    border: 3px solid white;
 }
 
 .upper {
+    background-color: #3498db;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     margin: 0 auto;
     width: 400px;
-    height: 500px;
+    height: 450px;
+}
+
+form {
+    margin: 0 auto;
+    width: 400px;
+    background: linear-gradient(rgb(52, 152, 219), rgb(124, 178, 214));
+    padding-bottom: 20px;
 }
 
 #bling {
@@ -34,10 +74,12 @@ body * {
 }
 
 #question {
+    display: block;
     height: 70px;
-    width: 400px;
+    width: 90%;
     font-size: 2em;
     border: none;
+    margin: 0 auto;
 }
 
 form > button {
@@ -59,7 +101,7 @@ form > button:disabled {
 }
 
 img {
-    width: 20em;
+    height: 175px;
     position: relative;
     overflow: hidden;
     border-radius: 50%;

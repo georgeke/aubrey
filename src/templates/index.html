@@ -9,6 +9,9 @@
 
   <body>
     <div>
+        <div class="topbar">
+            <span class="time">10:53pm</span>
+        </div>
         <div class="upper">
             <div id="bling"></div>
             <img src={{url_for('static', filename='img/drake.jpg')}}>
@@ -16,9 +19,11 @@
         </div>
         <form onsubmit="app.callTheHotline(this)">
             <input id="question" type="text" placeholder="Enter question..." maxlength="60" autofocus>
-            <br>
             <button type="button" onclick="app.callTheHotline(this)" disabled>Send</button>
         </form>
+        <div class="bottombar">
+            <div class="circle"></div>
+        </div>
     </div>
   </body>
 </html>

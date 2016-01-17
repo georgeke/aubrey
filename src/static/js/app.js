@@ -1,6 +1,6 @@
 var app = (function ($) {
     var DEFAULT_DESC = "Aubrey",
-        LOADING_DESC = "Loading...",
+        LOADING_DESC = "Dialing...",
         DEFAULT_BUTTON = "Send",
         RESTART_BUTTON = "Ask again",
         waitingToRestart = false;
