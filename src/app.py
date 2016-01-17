@@ -1,3 +1,4 @@
+import time
 from flask import Flask, request, render_template
 from answerer import Answerer
 
@@ -17,8 +18,16 @@ def landing():
 
 @app.route("/hotline", methods=["GET"])
 def hotline():
+    MIN_LOAD_TIME = 3
+
+    then = time.time()
     question = _sanitize(request.args.get("question"))
     answer = answerer.answer(question)
+
+    time_passed = time.time() - then
+    if time_passed < MIN_LOAD_TIME:
+        time.sleep(MIN_LOAD_TIME - time_passed)
+
     if answer is None:
         return "Invalid question.", 404
     else:
