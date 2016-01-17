@@ -2,7 +2,7 @@ var app = (function ($) {
     var DEFAULT_DESC = "Aubrey",
         LOADING_DESC = "Loading...",
         DEFAULT_BUTTON = "Send",
-        RESTART_BUTTON = "Ask another",
+        RESTART_BUTTON = "Ask again",
         waitingToRestart = false;
 
     function _showLoading() {
@@ -22,6 +22,10 @@ var app = (function ($) {
 
         $("button").text(RESTART_BUTTON).prop('disabled', false);
         waitingToRestart = true;
+    }
+
+    function _showError() {
+        _showAnswer("Invalid question, please try again!")
     }
 
     function _resetApp() {
@@ -48,6 +52,8 @@ var app = (function ($) {
             if (response.readyState == 4 && response.status == 200) {
                 _showAnswer(response.responseText);
             }
+        }).fail(function () {
+            _showError();
         });
 
         _showLoading();
