@@ -3,10 +3,6 @@ html {
 }
 
 * {
-    margin: 0;
-}
-
-body * {
     text-align: center;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     margin: 0;
@@ -21,7 +17,7 @@ body * {
     text-align:center;
 }
 
-.topbar * {
+.topbar > * {
     color: white;
 }
 
