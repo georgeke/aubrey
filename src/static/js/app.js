@@ -1,11 +1,12 @@
 function callTheHotline() {
-    var question = document.getElementById("question").value;
-    var xhttp = new XMLHttpRequest();
-    xhttp.onreadystatechange = function() {
-      if (xhttp.readyState == 4 && xhttp.status == 200) {
-        document.getElementById("bling").innerHTML = xhttp.responseText;
+    var question = $("#question").val();
+
+    $.get("/hotline?question=" + question, function(data, status, response) {
+      if (response.readyState == 4 && response.status == 200) {
+        $("#bling").text(response.responseText);
       }
-    };
-    xhttp.open("GET", "/hotline?question=" + question, true);
-    xhttp.send();
+    });
+
+    event.preventDefault();
+    return false;
 }

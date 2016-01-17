@@ -3,13 +3,20 @@
   <head>
     <title>Aubrey</title>
     <script src={{url_for('static', filename='js/app.js')}}></script>
+    <link rel="stylesheet" href={{url_for('static', filename='css/style.css')}}>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>
   </head>
 
   <body>
-    <form>
-      <input id="question" type="text" placeholder="Enter question...">
-      <button type="button" onclick="callTheHotline()">Send</button>
-    </form>
-    <div id="bling"></div>
+    <div>
+        <div id="bling"></div>
+        <img src={{url_for('static', filename='img/drake.jpg')}}>
+        <div class="description">Drake</div>
+        <form onsubmit="callTheHotline(this)">
+            <input id="question" type="text" placeholder="Enter question..." maxlength="60">
+            <br>
+            <button type="button" onclick="callTheHotline(this)">Send</button>
+        </form>
+    </div>
   </body>
-</html
+</html>

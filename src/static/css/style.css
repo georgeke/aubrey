@@ -1,0 +1,43 @@
+html {
+    background-color: black;
+}
+
+body > div {
+    margin: 3%;
+}
+
+body * {
+    text-align: center;
+    font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
+}
+
+.description {
+    font-size: 2.2em;
+    color: white;
+}
+
+#question {
+    width:400px;
+    margin-top: 2em;
+    font-size: 2em;
+    border: none;
+}
+
+form > button {
+    cursor: pointer;
+    color: white;
+    margin-top: 0.6em;
+    font-size: 2em;
+    border-radius: 27%/50%;
+    background-color: #279900;
+    border:none;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+
+img {
+    width: 20em;
+    position: relative;
+    overflow: hidden;
+    border-radius: 50%;
+}
