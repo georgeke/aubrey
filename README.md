@@ -1,6 +1,7 @@
 # Aubrey
 
 Ask any question, and have it answered with a relevant Drake lyric.
+Note: this is still a continual WIP, although a production version is up as I continue to iterate.
 
 #### How it works
 We use a combination of clustering and natural language processing to determine the lyric that the most related to an inputted question.
