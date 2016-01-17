@@ -11,13 +11,13 @@ body * {
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
 }
 
-.description {
+#description {
     font-size: 2.2em;
     color: white;
 }
 
 #question {
-    width:400px;
+    width: 400px;
     margin-top: 2em;
     font-size: 2em;
     border: none;
@@ -40,4 +40,40 @@ img {
     position: relative;
     overflow: hidden;
     border-radius: 50%;
+}
+
+.flashing {
+    -moz-transition:all 0.5s ease-in-out;
+    -webkit-transition:all 0.5s ease-in-out;
+    -o-transition:all 0.5s ease-in-out;
+    -ms-transition:all 0.5s ease-in-out;
+    transition:all 0.5s ease-in-out;
+    -moz-animation:blink normal 2s infinite ease-in-out;
+    -webkit-animation:blink normal 2s infinite ease-in-out;
+    -ms-animation:blink normal 2s infinite ease-in-out;
+    animation:blink normal 2s infinite ease-in-out;
+}
+
+@keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
+}
+
+@-webkit-keyframes blink {
+    0% {
+        opacity: 0;
+    }
+    50% {
+        opacity: 1;
+    }
+    100% {
+        opacity: 0;
+    }
 }
