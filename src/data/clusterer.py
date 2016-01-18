@@ -5,7 +5,7 @@ from sklearn.cluster import KMeans
 from collections import defaultdict
 
 class Clusterer():
-    CLUSTER_SIZE = 300
+    CLUSTER_SIZE = 500
 
     def __init__(self, root=""):
         with open(os.path.join(root, "json/feature_matrix.json"), "r") as infile:
