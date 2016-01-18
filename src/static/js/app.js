@@ -71,12 +71,6 @@ var app = (function ($) {
             } else {
                 $(this).css("font-size", "2em");
             }
-
-            if (length <= 0) {
-                $("button").prop("disabled", true);
-            } else {
-                $("button").prop("disabled", false);
-            }
         });
     });
 
