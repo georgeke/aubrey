@@ -1,4 +1,4 @@
-scipy
 numpy
+scipy
 sklearn
 NLTK
