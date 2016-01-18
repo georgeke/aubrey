@@ -6,7 +6,7 @@ app = Flask(__name__)
 answerer = Answerer()
 
 def _sanitize(string):
-    if len(string <= 0):
+    if len(string) <= 0:
         return string
     output = ""
     for c in string:
