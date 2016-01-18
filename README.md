@@ -2,7 +2,10 @@
 
 Ask any question, and have it answered with a relevant Drake lyric.
 
->Note: this is still a continual WIP, although a production version is up as I continue to iterate.
+>Note: this is still a WIP
+
+![2](https://cloud.githubusercontent.com/assets/3867546/12384429/ef2cf1fa-bd7f-11e5-9c9d-1c1e432897d4.png)
+
 
 #### How it works
 We use a combination of clustering and natural language processing to determine the lyric that the most related to an inputted question.
