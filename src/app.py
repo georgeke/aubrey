@@ -6,6 +6,8 @@ app = Flask(__name__)
 answerer = Answerer()
 
 def _sanitize(string):
+    if len(string <= 0):
+        return string
     output = ""
     for c in string:
         if (c >= "a" and c <= "z") or (c >= "A" and c <= "Z") or c == "'" or c == " " or (c >= "0" and c <= "9"):
