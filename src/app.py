@@ -34,5 +34,4 @@ def hotline():
         return answer
 
 if __name__ == "__main__":
-    # TODO:: remove debug
-    app.run(debug=True)
+    app.run()
