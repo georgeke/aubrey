@@ -48,7 +48,7 @@ var app = (function ($) {
 
         var question = $("#question").val();
 
-        $.get("/hotline?question=" + question, function(data, status, response) {
+        $.get("/aubrey/hotline?question=" + question, function(data, status, response) {
             if (response.readyState == 4 && response.status == 200) {
                 _showAnswer(response.responseText);
             }
