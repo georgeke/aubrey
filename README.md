@@ -2,7 +2,7 @@
 
 Ask any question, and have it answered with a relevant Drake lyric.
 
->Note: this is still a WIP
+Note: this is a continual WIP
 
 ![2](https://cloud.githubusercontent.com/assets/3867546/12384429/ef2cf1fa-bd7f-11e5-9c9d-1c1e432897d4.png)
 
@@ -19,10 +19,11 @@ We use a combination of clustering and natural language processing to determine 
 #### Challenges
   1. The comparison between a question and a lyric can take a long time, as pairwise calculation of similarity between two tokens can be slow at time. We tried to mitigate this by clustering lyrics into smaller groups, so that there are fewer lyrics to compare to. Further improvement can still be made, as some questions can still take up to 30s to answer.
   2. Using a bag of words technique for representing lyrics may not be a good way to cluster lyrics. Words that are synonyms are not considered, and this may end up splitting up similar lyrics into different clusters. Having 'washy' clusters could prevent a question from matching with a super relevant lyric. Work can still be put into a smarter way to represent sentences that takes into consideration synonym graphs.
-  3. The bag of words originally had many similar words that were considered different because of varying inflections of tenses. This made the dimensionality very high and clustering was slowed down. To reduce dimensionallity, 3 techniques were used:
+  3. Also related to our bag of words, we are currently just using unique 1-grams. This can be extended to using n-grams of arbitrary size, to perhaps capture more of the essense of a lyric as opposed to pure definitions. Choosing the cutoff point for n also will take experimenting.
+  4. The bag of words originally had many similar words that were considered different because of varying inflections of tenses. This made the dimensionality very high and clustering was slowed down. To reduce dimensionallity, 3 techniques were used:
     1. [Stemming](https://en.wikipedia.org/wiki/Stemming): reducing a word to its root/base form, so that words like ran and running will be treated as the same token.
     2. Filtering out rare words: there were plenty of rare words that appeared only once in all of Drake's lyrics.
     3. Removing common/stop words (e.g. to, a, the, etc.). Luckily, WordNet accounts for stopwords during tokenization.
-  4. The lyrics themselves needed cleaning up in some areas. For example, there were a lot of verbs contracted to drop their last g, such as "runnin'" or "cookin" (notice some have and some do not have the trailing apostrophe). This was cleaned up with some regex. Another example is varying unicode characters for the same meaning (e.g. U+0027 vs U+2019 for an apostrophe). Most of these issues were cleared with search and replace and some good ol' manual labour. There are still other lingering nuances, such as trailing punctuation (e.g. lyrics ending in commas), and Lyrics That Capitilize Every Letter In The Line.
+  5. The lyrics themselves needed cleaning up in some areas. For example, there were a lot of verbs contracted to drop their last g, such as "runnin'" or "cookin" (notice some have and some do not have the trailing apostrophe). This was cleaned up with some regex. Another example is varying unicode characters for the same meaning (e.g. U+0027 vs U+2019 for an apostrophe). Most of these issues were cleared with search and replace and some good ol' manual labour. There are still other lingering nuances, such as trailing punctuation (e.g. lyrics ending in commas), and Lyrics That Capitilize Every Letter In The Line.
 
 Started at [CalHacks 2.0](http://www.calhacks.io/)
